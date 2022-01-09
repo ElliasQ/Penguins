@@ -4,8 +4,9 @@
 
 #ifndef PENGUIN_GAME_PLAYER_H
 #define PENGUIN_GAME_PLAYER_H
-
 #include "board.h"
+#include "input_validation.h"
+#include <stdbool.h>
 
 /**
  * Structure that selects a penguin.
@@ -13,7 +14,7 @@
  * @param x Coordinate x of a penguin.
  * @param y Coordinate y of a penguin.
  */
- struct penguin{
+ struct Penguin{
     int x;
     int y;
 };
@@ -25,11 +26,15 @@
  * @param pen selects a penguin of the player.
  * @param penguin_coordinates Stores the coordinates of a penguin.
  */
- struct player{
+ struct Player{
     int current_score;
-    struct penguin pen;
-    int penguin_coordinates[];
+    struct Penguin* penguins;
+    struct Penguin* wasted_penguins; // for debugging
+    int penguins_size;
+    int wasted_penguins_size; // for debugging
 };
+
+struct Player create_new_player(int penguins);
 
 /**
  * Changes the current player.
@@ -46,17 +51,19 @@
   * @param px New coordinate x for a penguin.
   * @param py New coordinate y for a penguin.
   */
-  void save_penguins_coordinates(struct player p, int px, int py);
+  void save_penguin_coordinates(struct Player* p, int px, int py);
 
-  /**
-   * Adds the fish on the new isle to the score of the current player.
-   *
-   * @param board Pointer to board.
-   * @param p Pointer to structure of the current player.
-   * @param px New coordinate x of the penguin.
-   * @param py New coordinate y of the penguin.
-   */
-void collect_fish(struct Board board, struct player p, int px, int py);
+void change_penguin_coordinates(struct Player *p, struct Penguin penguin, int x, int y);
+
+/**
+ * Adds the fish on the new isle to the score of the current player.
+ *
+ * @param board Pointer to board.
+ * @param p Pointer to structure of the current player.
+ * @param px New coordinate x of the penguin.
+ * @param py New coordinate y of the penguin.
+ */
+void collect_fish(struct Board board, struct Player *p, int x, int y);
 
   /**
    * Searches if any player can make a move.
@@ -66,7 +73,8 @@ void collect_fish(struct Board board, struct player p, int px, int py);
    * @param columns Number of columns of the board.
    * @return the amount of possible movements.
    */
-   int can_any_player_move(struct Board board,int rows, int columns); /* deleted int possibleMovements */
+
+bool can_current_player_move(struct Board board, int *current_player,struct Player p1, struct Player p2,int key) ;
 
    /**
     * Changes a penguin from position.
@@ -76,7 +84,7 @@ void collect_fish(struct Board board, struct player p, int px, int py);
     * @param px New coordinate x of the penguin.
     * @param py New coordinate y of the penguin.
     */
-void move_penguin(struct Board board,int currentPlayer, int px, int py);
+int move_penguin(struct Board board,int currentPlayer, int px, int py);
 
 /**
  * Determines the winner and shows scores.
@@ -84,6 +92,9 @@ void move_penguin(struct Board board,int currentPlayer, int px, int py);
  * @param p1 Structure to score of player 1.
  * @param p2 Structure to score of player 2.
  */
-void determine_winner(struct player p1, struct player p2);
+
+bool check_penguins(struct Board board, struct  Player *p);
+
+void determine_winner(struct Player p1, struct Player p2);
 
 #endif //PENGUIN_GAME_PLAYER_H

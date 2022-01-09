@@ -1,9 +1,11 @@
 #ifndef INPUT_VALIDATION
 #define INPUT_VALIDATION
 
+
 #include <stdbool.h>
+#include "Player.h"
 #include "board.h"
-#include "player.h"
+
 
 /**
 * Checks if the given coordinates are sufficient
@@ -49,12 +51,28 @@ bool inside_board(struct Board board, int x, int y);
 * @param structure board
 * @param x position of penguin in row
 * @param y position of penguin in column
+* @param current_player used to differentiate penguins of two players
 * @param stage of the game(placement phase or movement phase)
 * @return true if the coordinates are valid, otherwise - false
 */
-bool validate_penguin_coordinates(struct Board board, int x, int y, int stage, int current_player);
+bool validate_penguin_coordinates(struct Board board, struct Player p1, struct Player p2,int x, int y, int current_player,int stage);
 
 
+
+bool check_selected_penguin(struct Board board, int x, int y);
+
+/*
+* Checks if selected penguin can move
+*
+* @param structure board
+* @param x position of penguin in row
+* @param y position of penguin in column
+* @param left
+* @param up
+* @param right
+* @param bottom
+*/
+bool IsMovable(struct Board board, int x, int y, int left, int up, int right, int bottom);
 
 /**
 * Checks if the given coordinates of the penguin are inside of the board
@@ -67,7 +85,7 @@ bool validate_penguin_coordinates(struct Board board, int x, int y, int stage, i
 * @param y new position of penguin in column
 * @return true if the penguin can move, otherwise - false
 */
-bool validate_new_coordinates(struct Board board, struct penguin penguin, int x, int y);
+bool validate_new_coordinates(struct Board board, struct Penguin p, int x, int y);
 
 
 /**
@@ -78,6 +96,11 @@ bool validate_new_coordinates(struct Board board, struct penguin penguin, int x,
 * @param args - number of arguments that have been read by scanf
 * @param expected_args - number of arguments that we expect
 */
-void scanf_check(int args, int expected_args);
+void unexpected_input_handler(int args, int expected_args);
+
+
+
+
+bool search_for_obstacles(struct Board board, int  coordinate,int start, int finish, char key);
 
 #endif // INPUT_VALIDATION

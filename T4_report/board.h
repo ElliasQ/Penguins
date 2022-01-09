@@ -1,5 +1,7 @@
 #ifndef BOARD
 #define BOARD
+
+#include "board.h"
  /**
  * Board is the structure that represents the board object.
  *
@@ -34,16 +36,31 @@
 * @param isles_with_1fish is the amount of isles with one fish on the game board
 * @return dynamically allocated data structure that represents the game board
 */
-char **generate_the_board( int columns,  int rows, int *isles_with_1fish);
-
+char **generate_the_board( int columns,  int rows, int tiles_with_1fish);
 
 /**
-* Prints out the game board
+* Prints out the game board.The function is called by show_the_board function
+*
+* @param board is an object of the board structure
+*/
+void print_out_board(struct Board board);
+
+/**
+* Prints out the board and its components
 *
 * @param board is an object of the board structure
 */
 void show_the_board(struct Board board);
 
+/*
+ * Generates random amount of fish from 1 - 4
+ *
+ * @param columns current column
+ * @param rows current rows
+ * @param tiles amount of tiles that must contain 1 fish (number depends on the user input)
+ * @param key generating tiles with 1 fish depending on the user input
+ * @param placed number of start_tiles(1 fish tiles)
+ */
 
 /**
 * Places the penguin on the board
@@ -54,7 +71,6 @@ void show_the_board(struct Board board);
 * @param player is current player
 * @param player_score is current player's score
 */
-
 void place_penguin(struct Board board,int x,int y, char player, int *player_score);
 
 /**

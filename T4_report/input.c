@@ -10,11 +10,11 @@ void ask_for_size_of_the_board(int *x, int *y)
 	
 	int  columns,rows=0;
 	
-	printf("Type in board dimensions(x y): ");
+	printf("Type in board dimensions(x y): \n");
 	
 	int args = scanf("%d %d", &columns, &rows);
-	
-	scanf_check(args,2);
+
+    unexpected_input_handler(args, 2);
     
 	*x = columns;
     *y = rows;
@@ -30,8 +30,8 @@ void ask_for_number_of_penguins(int *n)
 	printf("Type in number of penguins: ");
 	
 	int args = scanf("%d", &number);
-	
-	scanf_check(args,1);
+
+    unexpected_input_handler(args, 1);
 	
 	*n = number;
 }
@@ -41,8 +41,8 @@ int* ask_for_penguin_coordinates(int current_player, int stage)
 {
 	int x,y;
 	static int coordinates[2]; /* coordinates[0] == x, coordinates [1] == y */
-	char p1[10] = "Player 1"; /* current_player == 1 */
-	char p2[10] = "Player 2"; /* current_player == 0 */
+	char *p1 = "Player 1"; /* current_player == 1 */
+	char *p2 = "Player 2"; /* current_player == 0 */
 	if(stage == 1)
 	{
 		printf("%s,Type in penguin coordinates (x y): ", (current_player==1 ? p1 : p2) );
@@ -52,9 +52,9 @@ int* ask_for_penguin_coordinates(int current_player, int stage)
 		printf("\n%s,Type in new penguin coordinates (x y): ", (current_player==1 ? p1 : p2) );
 	}
 
-	int args = scanf("%d %d",&x,&y); 
-	
-	scanf_check(args,2);
+	int args = scanf("%d %d",&x,&y);
+
+    unexpected_input_handler(args, 2);
   	
 	coordinates[0] = x;
 	coordinates[1] = y;
