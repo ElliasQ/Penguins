@@ -1,3 +1,0 @@
-C:/Users/arrog/Desktop/new_penguins/Penguins-Game-Project/src/AutonomousMode/cmake-build-debug/CMakeFiles/AutonomousMode.dir
-C:/Users/arrog/Desktop/new_penguins/Penguins-Game-Project/src/AutonomousMode/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/arrog/Desktop/new_penguins/Penguins-Game-Project/src/AutonomousMode/cmake-build-debug/CMakeFiles/rebuild_cache.dir
